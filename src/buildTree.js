@@ -2,7 +2,6 @@ import _ from 'lodash'
 
 const buildTree = (data1, data2) => {
     const difference = []
-    // let difString = ''
     const keys = Array.from(
         new Set([...Object.keys(data1), ...Object.keys(data2)].sort())
     )
