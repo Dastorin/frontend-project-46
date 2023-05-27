@@ -25,7 +25,7 @@ jobs:
               run: npm run lint
 
             - name: Run tests
-              run: npx jest
+              run: npm run test
 
             - name: Generate coverage report
               run: npm run coverage
