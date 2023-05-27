@@ -1,12 +1,17 @@
-install: 
+install:
 	npm ci
+
 publish:
 	npm publish --dry-run
+
 lint:
 	npx eslint .
-gendiff: 
+
+gendiff:
 	node bin/gendiff.js
-test:
+
+tests:
 	npm run test
+
 test-coverage:
 	npx jest --coverage
