@@ -7,8 +7,8 @@
     "scripts": {
         "gendiff": "bin/gendiff.js",
         "lint": "eslint .",
-        "test": "npx jest --experimental-vm-modules=true",
-        "coverage": "jest -coverage"
+        "test": "NODE_OPTIONS=--experimental-vm-modules npx jest",
+        "coverage": "NODE_OPTIONS=--experimental-vm-modules npx jest --coverage"
     },
     "author": "",
     "license": "ISC",
