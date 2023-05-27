@@ -1,4 +1,4 @@
-name: test-lint-coverage report
+name: test-lint-coverage_report
 
 on:
     push:
