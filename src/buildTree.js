@@ -1,12 +1,8 @@
-import getFile from './utils/getFile.js'
-import parser from './utils/parser.js'
 import _ from 'lodash'
 
-const buildTree = (filePath1, filePath2) => {
+const buildTree = (data1, data2) => {
     const difference = []
     let difString = ''
-    const data1 = parser(...getFile(filePath1))
-    const data2 = parser(...getFile(filePath2))
     const keys = Array.from(
         new Set([...Object.keys(data1), ...Object.keys(data2)].sort())
     )
