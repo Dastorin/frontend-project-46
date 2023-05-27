@@ -1,7 +1,7 @@
 import yaml from 'js-yaml'
 
-const parser = (file, type) => {
-    if (type === 'yaml') {
+const parsers = (file, type) => {
+    if (type === 'yaml' || type === 'yml') {
         const data = yaml.load(file)
         return data
     }
@@ -11,4 +11,4 @@ const parser = (file, type) => {
     }
     return 'wrong file extension'
 }
-export default parser
+export default parsers
