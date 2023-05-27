@@ -1,7 +1,5 @@
 /* eslint-disable no-undef */
-import getFile from '../src/utils/getFile.js'
 import resultFlat from '../_fixtures_/resultFlatFile.js'
-import parser from '../src/parser.js'
 import genDiff from '../src/genDiff.js'
 
 const jsonFiles = {
