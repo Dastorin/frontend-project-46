@@ -7,7 +7,7 @@
     "scripts": {
         "gendiff": "bin/gendiff.js",
         "lint": "eslint .",
-        "test": "npx jest",
+        "test": "npx jest --experimental-vm-modules=true",
         "coverage": "jest -coverage"
     },
     "author": "",
