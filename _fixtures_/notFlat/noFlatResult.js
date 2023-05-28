@@ -1,4 +1,4 @@
-const noFlatResult = `{
+const result = `{
     common: {
       + follow: false
         setting1: Value 1
@@ -42,4 +42,4 @@ const noFlatResult = `{
         fee: 100500
     }
 }`
-export default noFlatResult
+export default result
