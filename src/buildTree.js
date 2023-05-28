@@ -4,9 +4,8 @@ const buildTree = (data1, data2) => {
     const keys = _.union(Object.keys(data1), Object.keys(data2)).sort()
     const difference = keys
         .map((key) => {
-            if (_.isObject(data1[key]) && _.isObject(data2[key])) {
+            if (_.isObject(data1[key]) && _.isObject(data2[key]))
                 return `   ${key}: ${buildTree(data1[key], data2[key])}`
-            }
             let str = ''
             if (data1[key] !== data2[key]) {
                 if (_.has(data1, key)) {
@@ -21,13 +20,9 @@ const buildTree = (data1, data2) => {
                         : ` + ${key}: ${data2[key]}`
                 }
             }
-            if (data1[key] === data2[key]) {
-                str += `   ${key}: ${data1[key]}`
-            }
-            return str
+            if (data1[key] === data2[key]) return (str += `   ${key}: ${data1[key]}`)
         })
         .join('\n')
     return `{\n${difference}\n}`
 }
-
 export default buildTree
