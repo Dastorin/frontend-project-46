@@ -8,11 +8,17 @@ const buildTree = (data1, data2) => {
                 return {
                     key: key,
                     type: 'nested',
-                    children: buildTree(data1[key], data2[key]) 
+                    children: buildTree(data1[key], data2[key]),
                 }
             }
             if (data1[key] === data2[key]) {
                 return { key: key, type: 'unchanged', value: data1[key] }
+            }
+            if (data1[key] !== data2[key]) {
+                return [
+                    { key: key, type: 'added', value: data1[key] },
+                    { key: key, type: 'deleted', value: data2[key] },
+                ]
             }
         }
         if (_.has(data1, key) && !_.has(data2, key)) {
