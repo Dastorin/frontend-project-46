@@ -1,16 +1,16 @@
 import _ from 'lodash'
 
-const stylish = (value, replacer = ' ', spaceCount = 1) => {
+const stylish = (value) => {
     const iter = (data, depth) => {
         if (!_.isObject(data)) return `${data}`
 
         const lines = Object.entries(data).map(([key, value]) => {
             const preparedValue = iter(value, depth + 1)
-            const indent = replacer.repeat(depth * spaceCount)
+            const indent = ' '.repeat(depth * 2)
             return `${indent}${key}: ${preparedValue}`
         })
 
-        const outIndent = replacer.repeat(depth * spaceCount - spaceCount)
+        const outIndent = ' '.repeat(depth * 2 - 2)
         const rawResult = ['{', ...lines, `${outIndent}}`].join('\n')
         return rawResult
     }
