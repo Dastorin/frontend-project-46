@@ -11,7 +11,7 @@ const stylish = (tree) => {
                     return `${indent} ${key}: ${iter(node, (depth += 1))}`
                 }
                 case 'changed': {
-                    return `${indent} - ${key}: ${node.value[0]}\n${indent} + ${key}: ${node.value[1]}`
+                    return `${indent} - ${key}: ${node.value1}\n${indent} + ${key}: ${node.value2}`
                 }
                 case 'unchanged': {
                     return `${indent} ${key}: ${node.value}`
