@@ -3,23 +3,23 @@ import _ from 'lodash'
 const stylish = (tree) => {
     const iter = (node, depth = 1) => {
         const indent = ' '.repeat(depth * 2)
-        const line = node.map((key) => {
-            const { type } = node[key]
+        const line = node.map((children) => {
+            const { type } = children
             switch (type) {
                 case 'nested': {
-                    return `${indent} ${key}: ${iter(node, (depth += 1))}`
+                    return `${indent} ${children}: ${iter(node, (depth += 1))}`
                 }
                 case 'changed': {
-                    return `${indent} - ${key}: ${node.value1}\n${indent} + ${key}: ${node.value2}`
+                    return `${indent} - ${children}: ${node.value1}\n${indent} + ${children}: ${node.value2}`
                 }
                 case 'unchanged': {
-                    return `${indent} ${key}: ${node.value}`
+                    return `${indent} ${children}: ${node.value}`
                 }
                 case 'deleted': {
-                    return `${indent} - ${key}: ${node.value}`
+                    return `${indent} - ${children}: ${node.value}`
                 }
                 case 'added': {
-                    return `${indent} + ${key}: ${node.value}`
+                    return `${indent} + ${children}: ${node.value}`
                 }
             }
         })
