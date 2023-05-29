@@ -1,20 +1,32 @@
 import _ from 'lodash'
 
-const stylish = (value) => {
-    const iter = (data, depth) => {
-        if (!_.isObject(data)) return `${data}`
-
-        const lines = Object.entries(data).map(([key, value]) => {
-            const preparedValue = iter(value, depth + 1)
-            const indent = ' '.repeat(depth * 2)
-            return `${indent}${key}: ${preparedValue}`
+const stylish = (tree) => {
+    const iter = (node, depth = 1) => {
+        if (!_.isObject(node)) return `${node}`
+        const indent = ' '.repeat(depth * 2)
+        const line = Object.keys(node).map((key) => {
+            const { type } = node.type
+            switch (type) {
+                case 'nested': {
+                    return `${indent} ${key}: ${iter(...node, (depth += 1))}`
+                }
+                case 'changed': {
+                    return `${indent} - ${key}: ${node.value[0]}\n${indent} + ${key}: ${node.value[1]}`
+                }
+                case 'unchanged': {
+                    return `${indent} ${key}: ${node.value}`
+                }
+                case 'deleted': {
+                    return `${indent} - ${key}: ${node.value}`
+                }
+                case 'added': {
+                    return `${indent} + ${key}: ${node.value}`
+                }
+            }
         })
-
-        const outIndent = ' '.repeat(depth * 2 - 2)
-        const rawResult = ['{', ...lines, `${outIndent}}`].join('\n')
-        return rawResult
+        const bracketIndent = ' '.repeat(depth * 2 - 2)
+        return ['{', ...line, `${bracketIndent}}`].join('\n')
     }
-
-    return iter(value, 1)
+    return iter(tree, 1)
 }
 export default stylish
