@@ -2,9 +2,8 @@ import _ from 'lodash'
 
 const stylish = (tree) => {
     const iter = (node, depth = 1) => {
-        if (!_.isObject(node)) return `${node}`
         const indent = ' '.repeat(depth * 2)
-        const line = Object.keys(node).map((key) => {
+        const line = node.map((key) => {
             const { type } = node[key]
             switch (type) {
                 case 'nested': {
