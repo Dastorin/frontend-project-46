@@ -5,7 +5,7 @@ const stylish = (tree) => {
         if (!_.isObject(node)) return `${node}`
         const indent = ' '.repeat(depth * 2)
         const line = Object.keys(node).map((key) => {
-            const { type } = node.type
+            const { type } = node[key]
             switch (type) {
                 case 'nested': {
                     return `${indent} ${key}: ${iter(node, (depth += 1))}`
