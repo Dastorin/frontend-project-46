@@ -26,36 +26,23 @@ const stylish = (tree) => {
             const type = children.type
             switch (type) {
                 case 'nested': {
-                    return `${indent} ${children.key}: ${iter(
-                        children.children,
-                        (depth += 1)
-                    )}`
+                    return `${indent} ${children.key}: ${iter(children.children)}`
                 }
                 case 'changed': {
-                    return `${indent} - ${children.key}: ${stringify(
-                        children.value.key1
-                    )}\n${indent} + ${children.key}: ${stringify(
-                        children.value.key2
-                    )}`
+                    return `${indent} - ${children.key}: ${children.value.key1}\n${indent} + ${children.key}: ${children.value.key2}`
                 }
                 case 'unchanged': {
-                    return `${indent} ${children.key}: ${stringify(
-                        children.value
-                    )}`
+                    return `${indent} ${children.key}: ${children.value}`
                 }
                 case 'deleted': {
-                    return `${indent} - ${children.key}: ${stringify(
-                        children.value
-                    )}`
+                    return `${indent} - ${children.key}: ${children.value}`
                 }
                 case 'added': {
-                    return `${indent} + ${children.key}: ${stringify(
-                        children.value
-                    )}`
+                    return `${indent} + ${children.key}: ${children.value}`
                 }
             }
         })
-        const bracketIndent = ' '.repeat(depth * 1)
+        const bracketIndent = ' '.repeat(0)
         return ['{', ...line, `${bracketIndent}}`].join('\n')
     }
     return iter(tree, 1)

@@ -10,7 +10,6 @@ program
     .option('-f, --format <type>', 'output format')
     .helpOption('-h, --help', 'display help for command')
     .action((filepath1, filepath2) => {
-        console.log(JSON.stringify(genDiff(filepath1, filepath2), null, 2))
         console.log(stylish(genDiff(filepath1, filepath2)))
     })
 program.parse(process.argv)
