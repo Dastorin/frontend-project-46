@@ -18,16 +18,23 @@ const buildTree = (data1, data2) => {
                 return {
                     key: key,
                     type: 'changed',
-                    value1: data1[key],
-                    value2: data2[key],
+                    value: { key1: data1[key], key2: data2[key] },
                 }
             }
         }
         if (_.has(data1, key) && !_.has(data2, key)) {
-            return { key: key, type: 'added', value: data1[key] }
+            return {
+                key: key,
+                type: 'added',
+                value: data1[key],
+            }
         }
         if (!_.has(data1, key) && _.has(data2, key)) {
-            return { key: key, type: 'deleted', value: data2[key] }
+            return {
+                key: key,
+                type: 'deleted',
+                value: data2[key],
+            }
         }
     })
     return difference
