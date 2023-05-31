@@ -9,10 +9,9 @@ const stringify = (value, replacer = ' ', spacesCount = 4) => {
 
         let indentSize = depth * spacesCount
         let currentIndent = replacer
-            .repeat(indentSize * spacesCount * 2)
-            .slice(0, -2)
+            .repeat(indentSize * spacesCount)
         let bracketIndent = replacer
-            .repeat((indentSize + 2) * spacesCount )
+            .repeat(indentSize * spacesCount * 2 * 2)
         const lines = Object.entries(currentValue).map(
             ([key, val]) => `${currentIndent}${key}: ${iter(val, depth + 1)}`
         )
@@ -39,7 +38,7 @@ const stylish = (tree, replacer = ' ', spaceCount = 4) => {
                     return `${getIndent(depth)}  ${children.key}: ${iter(
                         children.children,
                         depth + 1,
-                        8
+                        spaceCount
                     )}`
                 }
                 case 'changed': {
@@ -47,12 +46,12 @@ const stylish = (tree, replacer = ' ', spaceCount = 4) => {
                         children.value.key1,
                         replacer,
                         depth,
-                        8
+                        spaceCount
                     )}\n${getIndent(depth)}+ ${children.key}: ${ stringify(
                         children.value.key2,
                         replacer,
                         depth,
-                        8
+                        spaceCount
                     )}`
                 }
                 case 'unchanged': {
@@ -60,23 +59,23 @@ const stylish = (tree, replacer = ' ', spaceCount = 4) => {
                         children.value,
                         replacer,
                         depth,
-                        8
+                        spaceCount
                     )}`
                 }
                 case 'deleted': {
                     return `${getIndent(depth)}+ ${children.key}: ${ stringify(
                         children.value,
-                        replacer,
+                        ' ',
                         depth,
-                        8
+                        spaceCount + 2
                     )}`
                 }
                 case 'added': {
                     return `${getIndent(depth)}- ${children.key}: ${ stringify(
                         children.value,
-                        replacer,
+                        ' ',
                         depth,
-                        8
+                        spaceCount + 2
                     )}`
                 }
             }
