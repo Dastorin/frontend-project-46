@@ -29,22 +29,21 @@ const stylish = (data) => {
         const getIndent = (depth) => replacer.repeat(depth * spacesCount).slice(0, -2)
         const result = node.map((child) => {
             switch (child.type) {
-                case 'unchaged': {
-                    return `${getIndent(depth)}  ${child.key}: ${stringify(child.value)}`
-                }
                 case 'changed': {
                     return `${getIndent(depth)} - ${child.key}: ${stringify(
                         child.value1
                     )}\n${getIndent(depth)} + ${child.key}: ${stringify(child.value2)}`
                 }
                 case 'added': {
-                    return `${getIndent(depth)} + ${child.key}: ${stringify(child.value)}`
+                    return `${getIndent(depth)} + ${child.key}: ${stringify(child.value2)}`
                 }
                 case 'deleted': {
-                    return `${getIndent(depth)} - ${child.key}: ${stringify(child.value)}`
+                    return `${getIndent(depth)} - ${child.key}: ${stringify(child.value1)}`
                 }
                 case 'unchanged': {
-                    return `${getIndent(depth)}  ${child.key}: ${stringify(child.value)}`
+                    return `${getIndent(depth)} ${doubleSpace}${child.key}: ${stringify(
+                        child.value1
+                    )}`
                 }
                 case 'nested': {
                     return `${getIndent(depth)}  ${child.key}: ${iter(child.children, depth + 1)}`
